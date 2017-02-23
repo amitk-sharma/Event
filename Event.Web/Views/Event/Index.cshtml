@@ -1,0 +1,36 @@
+﻿<div ng-app="myApp" ng-controller="eventCtrl">
+    <div class="row">
+
+        <table class="col-md-12">
+            <tr >
+                <th class="col-md-2">Title</th>
+                <th class="col-md-2">.Descripition</th>
+                <th class="col-md-2">EventDate </th>
+                <th class="col-md-2">EventType </th>
+                <th class="col-md-2">Location </th>
+                <th class="col-md-2"></th>
+            </tr>
+            <tr ng-repeat="x in events">
+                <td class="col-md-2"><a ng-click="myFunc(x.Id)">{{ x.Title }}</a></td>
+                <td class="col-md-2">{{ x.Descripition }}</td>
+                <td class="col-md-2">{{ x.EventDate }}</td>
+                <td class="col-md-2">{{ x.EventType }}</td>
+                <td class="col-md-2">{{ x.Location }}</td>
+                <td class="col-md-2"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('eventCtrl', function($scope, $http) {
+    $http.get("/api/event")
+    .then(function (response) { $scope.events = response.data; });
+
+    $scope.myFunc = function (data) {
+        alert(data);
+    }
+});
+</script>
